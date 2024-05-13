@@ -1,0 +1,49 @@
+# name: 'Update last pull date'
+name: 'Robbie Testing!'
+description: 'Updates the last pull date time in UTC format'
+inputs:
+  organization_name:
+    description: 'The organization name to use for pull date update - e.g. ahl-admirals'
+    type: string
+    required: true
+  date_time_utc:
+    description: 'Date to pass to update function in YYYY-MM-DDTHH:mm:ss format'
+    type: string
+  table_name:
+    description: 'The Dynamodb table containing the data - e.g. ingestion-config'
+    type: string
+    required: true
+  product_name:
+    description: 'The product name ("api" in old ingestion, "source_system" in new ingestion) - e.g. shopify'
+    type: string
+    required: true
+  attribute_to_update:
+    description: 'Optional attribute for individual updating. If nothing passed in, all attributes will be updated  - e.g. shopify-checkouts (legacy), checkouts (kernel)'
+    type: string
+    required: false
+  
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+
+    - name: Install dependencies
+      run: pip install boto3
+      shell: bash
+
+    - name: Pass inputs to environment
+      run: |
+        echo "ORGANIZATION_NAME=${{ inputs.organization_name }}" >> $GITHUB_ENV
+        echo "DATE_TIME_UTC=${{ inputs.date_time_utc }}" >> $GITHUB_ENV
+        echo "TABLE_NAME=${{ inputs.table_name }}" >> $GITHUB_ENV
+        echo "PRODUCT_NAME=${{ inputs.product_name }}" >> $GITHUB_ENV
+        echo "ATTRIBUTE_TO_UPDATE=${{ inputs.attribute_to_update }}" >> $GITHUB_ENV
+      shell: bash
+    - name: Reload Dynamo
+      id: reload-dynamo
+      run: python .github/actions/update_last_pull_action.py
+      shell: bash

@@ -1,0 +1,57 @@
+name: Update last pull date time
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                required: true
+                type: choice
+                options:
+                    - 'development'
+                    - 'production'
+            organization_name:
+                description: "The organization name to use for pull date update - e.g. ahl-admirals"
+                required: true
+                type: string
+            date_time_utc:
+                description: 'Date to pass to update function in YYYY-MM-DDTHH:mm:ss format'
+                required: true
+                type: string
+            table_name:
+                description: 'The Dynamodb table containing the data - e.g. ingestion-config'
+                type: string
+                required: true
+            product_name:
+                description: 'The product name ("api" in old ingestion, "source_system" in new ingestion) - e.g. shopify'
+                type: string
+                required: true
+            attribute_to_update:
+                description: 'Optional attribute for individual updating. If nothing passed in, all attributes will be updated  - e.g. shopify-checkouts (legacy), checkouts (kernel)'
+                type: string
+                required: false
+           
+jobs:
+    reload-dynamo:
+        name: Reload Dynamo
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}
+        permissions:
+            id-token: write
+            issues: write
+            contents: read
+        steps:
+          - name: Checkout
+            uses: actions/checkout@main
+          - name: Configure AWS Credentials for deployment account
+            uses: aws-actions/configure-aws-credentials@v1
+            with:
+                role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+                aws-region: us-east-1
+          - name: Reload DynamoDB document from JSON
+            id: reload_dynamo
+            uses: ./.github/actions/
+            with:
+                organization_name: "${{ github.event.inputs.organization_name }}"
+                date_time_utc: "${{ github.event.inputs.date_time_utc }}"
+                table_name: "${{ github.event.inputs.table_name }}"
+                product_name: "${{ github.event.inputs.product_name }}"
+                attribute_to_update: "${{ github.event.inputs.attribute_to_update }}"

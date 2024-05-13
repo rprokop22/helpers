@@ -1,0 +1,27 @@
+datastore:
+  retail_orders_shopify:
+    bi_columns:
+      client_property: "'{{ cookiecutter.__project_snake }}'"
+  retail_products_shopify:
+    bi_columns:
+      client_property: "'{{ cookiecutter.__project_snake }}'"
+  ticketing_events_tdc:
+    bi_columns:
+      client_property: "'{{ cookiecutter.__project_snake }}'"
+      stlr_game_number: 1
+      stlr_is_renewal: 1
+      stlr_season_year: 1
+  ticketing_tickets_tdc:
+    bi_columns:
+      client_property: "'{{ cookiecutter.__project_snake }}'"
+      stlr_product: 'Not Mapped'
+      stlr_reported_revenue: t.ticket_price
+      stlr_season_year: 1
+scv:
+  customers_master_merged:
+    venues:
+      - name: FILL ME IN
+        latitude: 0.0
+        longitude: 0.0
+$schema: |-
+  ../../../schema-infer/generated_schemas/milb_dbt_v{{ cookiecutter.__schema_version }}.json
