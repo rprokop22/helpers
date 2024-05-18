@@ -7,7 +7,7 @@ import json
 # replace all the \n and \t in the sql queries
 def replace (value):
     # make sure the value is a string before performing the replace 
-    if isinstance(value, str):
+    if isinstance(value, str) and '\n' in value:
         new_value = value.replace("\\t", "    ").replace("\\n","\n")
         return PreservedScalarString(new_value)
     return value
