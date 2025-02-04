@@ -3,6 +3,7 @@
 -- Ask Robbie Prokop if you have any questions
 
 
+
 -- buyerType
 SELECT 
  [buyerTypeId]
@@ -17,6 +18,7 @@ SELECT
 ,[buyerTypeGroupCode]
 ,[buyerTypeGroupDesc]
 ,[buyerTypeGroupDisplayOrder]
+,[loadId]
 INTO [ToledoWalleye].[staging].[buyerType_migration_1]
 from [ToledoWalleye].[staging].[buyerType]
 
@@ -61,6 +63,7 @@ SELECT
 ,[eventCategoryCode]
 ,[eventCategoryDesc]
 ,[eventCategoryDisplayOrder]
+,[loadId]
 INTO [ToledoWalleye].[staging].[event_migration_1]
 from [ToledoWalleye].[staging].[event]
 
@@ -94,6 +97,7 @@ SELECT
 ,[createdByAgencyId]
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[orders_migration_1]
 from [ToledoWalleye].[staging].[orders]
 
@@ -124,6 +128,7 @@ SELECT
 ,[createdByUserId]
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[package_migration_1]
 from [ToledoWalleye].[staging].[package]
 
@@ -166,6 +171,7 @@ SELECT
 ,[createdByAgencyId]
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[patronContactAddress_migration_1]
 FROM [ToledoWalleye].[staging].[patronContactAddress]
 
@@ -186,6 +192,7 @@ SELECT
 ,[createdByAgencyId]
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[patronContactEmail_migration_1]
 from [ToledoWalleye].[staging].[patronContactEmail]
 
@@ -210,6 +217,7 @@ SELECT
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
 ,[isMobile]
+,[loadId]
 INTO [ToledoWalleye].[staging].[patronContactPhone_migration_1]
 from [ToledoWalleye].[staging].[patronContactPhone]
 
@@ -236,6 +244,7 @@ SELECT
 ,[createdByAgencyId]
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[patronContact_migration_1]
 from [ToledoWalleye].[staging].[patronContact]
 
@@ -251,6 +260,7 @@ SELECT
 ,[createdByUserId]
 ,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
 ,[lastUpdatedByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[patronSalesRep_migration_1]
 from [ToledoWalleye].[staging].[patronSalesRep]
 
@@ -269,9 +279,9 @@ SELECT
 ,[priceScaleGroupCode]
 ,[priceScaleGroupDesc]
 ,[priceScaleGrpDisplayOrder]
+,[loadId]
 INTO [ToledoWalleye].[staging].[priceScale_migration_1]
 from [ToledoWalleye].[staging].[priceScale]
-
 
 -- salesRep
 
@@ -301,6 +311,7 @@ SELECT
 ,[lastUpdatedByUserId]
 ,CAST([createdDate] AS datetime2) AS createdDate
 ,[createdByUserId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[salesRep_migration_1]
 from [ToledoWalleye].[staging].[salesRep]
 
@@ -323,8 +334,10 @@ SELECT
 ,[venueCode]
 ,[venueDesc]
 ,[venueDisplayOrder]
+,[loadId]
 INTO [ToledoWalleye].[staging].[section_migration_1]
 from [ToledoWalleye].[staging].[section]
+
 
 -- ticketActivity
 
@@ -367,5 +380,7 @@ SELECT
 ,[removeTransactionId]
 ,[marketStatus]
 ,[originalTicketId]
+,[loadId]
 INTO [ToledoWalleye].[staging].[ticketActivity_migration_1]
 from [ToledoWalleye].[staging].[ticketActivity]
+
