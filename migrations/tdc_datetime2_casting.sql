@@ -2,6 +2,131 @@
 -- An issue arose with the migration of echl_walleye, and there was a need to re-cast everything as a datetime2 datatype. 
 -- Ask Robbie Prokop if you have any questions
 
+
+-- buyerType
+SELECT 
+ [buyerTypeId]
+,[buyerTypeCode]
+,[buyerTypeDesc]
+,[buyerTypeDisplayOrder]
+,CAST([createdDate] AS datetime2) AS createdDate
+,[createdByUserId]
+,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
+,[lastUpdatedByUserId]
+,[buyerTypeGroupId]
+,[buyerTypeGroupCode]
+,[buyerTypeGroupDesc]
+,[buyerTypeGroupDisplayOrder]
+INTO [ToledoWalleye].[staging].[buyerType_migration_1]
+from [ToledoWalleye].[staging].[buyerType]
+
+
+-- event
+SELECT 
+ [eventId]
+,[supplierId]
+,[eventCode]
+,[eventDesc]
+,[eventPublicDesc]
+,[eventDisplayOrder]
+,[eventClassDesc]
+,[eventTrueTypeDesc]
+,[eventDateTypeDesc]
+,[eventStatusDesc]
+,[eventInventoryTypeDesc]
+,[activeStatus]
+,[secondaryTitle]
+,[venueId]
+,[venueCode]
+,[venueDesc]
+,[venueDisplayOrder]
+,[seasonId]
+,[seasonCode]
+,[seasonDesc]
+,[seasonDisplayOrder]
+,[eventRunId]
+,[eventRunCode]
+,[eventRunDesc]
+,[eventRunDisplayOrder]
+,[targetRevenueAmount]
+,[targetTicketQuantity]
+,[eventDate]
+,[eventDayOfWeek]
+,[expansionPending]
+,CAST([createdDate] AS datetime2) AS createdDate
+,[createdByUserId]
+,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
+,[lastUpdatedByUserId]
+,[eventCategoryId]
+,[eventCategoryCode]
+,[eventCategoryDesc]
+,[eventCategoryDisplayOrder]
+INTO [ToledoWalleye].[staging].[event_migration_1]
+from [ToledoWalleye].[staging].[event]
+
+
+-- orders
+SELECT 
+ [orderId]
+,[financialAccountId]
+,[supplierId]
+,[marketingSourceId]
+,[marketType]
+,[orderSalesBalance]
+,[orderPaidAmount]
+,[orderReservationAmount]
+,[orderSalesAmount]
+,[orderTotalAmount]
+,[serviceChargeAmount]
+,[ticketChargeAmount]
+,[deliveryChargeAmount]
+,[transactionChargeAmount]
+,[eventChargeAmount]
+,[packageChargeAmount]
+,[packageSeatChargeAmount]
+,[createdByChannelId]
+,[createdByChannelDesc]
+,[createdByChannelCode]
+,[serviceRepId]
+,[salesRepId]
+,CAST([createdDate] AS datetime2) AS createdDate
+,[createdByUserId]
+,[createdByAgencyId]
+,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
+,[lastUpdatedByUserId]
+INTO [ToledoWalleye].[staging].[orders_migration_1]
+from [ToledoWalleye].[staging].[orders]
+
+-- package
+SELECT 
+ [packageId]
+,[supplierId]
+,[packageCode]
+,[packageDesc]
+,[packageDisplayOrder]
+,[activeStatus]
+,[packagePublicDesc]
+,[packageReferenceDate]
+,[packageClassDesc]
+,[seasonId]
+,[seasonCode]
+,[seasonDesc]
+,[seasonDisplayOrder]
+,[seriesId]
+,[seriesCode]
+,[seriesDesc]
+,[seriesDisplayOrder]
+,[packageGroupId]
+,[packageGroupCode]
+,[packageGroupDesc]
+,[packageGroupDisplayOrder]
+,CAST([createdDate] AS datetime2) AS createdDate
+,[createdByUserId]
+,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
+,[lastUpdatedByUserId]
+INTO [ToledoWalleye].[staging].[package_migration_1]
+from [ToledoWalleye].[staging].[package]
+
 -- patron accounts
 SELECT [patronAccountId]
       ,[alternateAccountId]
@@ -114,24 +239,6 @@ SELECT
 INTO [ToledoWalleye].[staging].[patronContact_migration_1]
 from [ToledoWalleye].[staging].[patronContact]
 
--- patronNote
-
-SELECT 
-[patronNoteId]
-,[noteTypeId]
-,[noteAssociationTypeDesc]
-,[patronAccountId]
-,[patronContactId]
-,[noteText]
-,[activeStatus]
-,CAST([createdDate] AS datetime2) AS createdDate
-,[createdByUserId]
-,[createdByAgencyId]
-,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
-,[lastUpdatedByUserId]
-INTO [ToledoWalleye].[staging].[patronNote_migration_1]
-from [ToledoWalleye].[staging].[patronNote]
-
 -- patronSalesRep
 
 SELECT 
@@ -146,27 +253,6 @@ SELECT
 ,[lastUpdatedByUserId]
 INTO [ToledoWalleye].[staging].[patronSalesRep_migration_1]
 from [ToledoWalleye].[staging].[patronSalesRep]
-
--- patronTrait
-
-SELECT 
-[patronTraitId]
-,[patronContactId]
-,[patronAccountId]
-,[traitId]
-,[integerData]
-,[dateData]
-,[stringData]
-,[currencyData]
-,[memoData]
-,[booleanData]
-,CAST([createdDate] AS datetime2) AS createdDate
-,[createdByUserId]
-,[createdByAgencyId]
-,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
-,[lastUpdatedByUserId]
-INTO [ToledoWalleye].[staging].[patronTrait_migration_1]
-from [ToledoWalleye].[staging].[patronTrait]
 
 -- priceScale
 
@@ -186,23 +272,6 @@ SELECT
 INTO [ToledoWalleye].[staging].[priceScale_migration_1]
 from [ToledoWalleye].[staging].[priceScale]
 
--- promotion
-
-SELECT 
-[promotionId]
-,[promotionCode]
-,[promotionDesc]
-,[promotionDisplayOrder]
-,[activeStatus]
-,[promotionPublicDesc]
-,[promotionTypeDesc]
-,[supplierId]
-,CAST([createdDate] AS datetime2) AS createdDate
-,[createdByUserId]
-,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
-,[lastUpdatedByUserId]
-INTO [ToledoWalleye].[staging].[promotion_migration_1]
-from [ToledoWalleye].[staging].[promotion]
 
 -- salesRep
 
@@ -257,20 +326,6 @@ SELECT
 INTO [ToledoWalleye].[staging].[section_migration_1]
 from [ToledoWalleye].[staging].[section]
 
--- supplier
-
-SELECT 
-[supplierId]
-,[supplierCode]
-,[supplierDesc]
-,[supplierDisplayOrder]
-,CAST([createdDate] AS datetime2) AS createdDate
-,[createdByUserId]
-,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
-,[lastUpdatedByUserId]
-INTO [ToledoWalleye].[staging].[supplier_migration_1]
-from [ToledoWalleye].[staging].[supplier]
-
 -- ticketActivity
 
 SELECT 
@@ -314,53 +369,3 @@ SELECT
 ,[originalTicketId]
 INTO [ToledoWalleye].[staging].[ticketActivity_migration_1]
 from [ToledoWalleye].[staging].[ticketActivity]
-
--- trait
-
-SELECT 
-[traitId]
-,[traitCode]
-,[traitDesc]
-,[traitDisplayOrder]
-,[activeStatus]
-,[traitShortDesc]
-,[traitAssociationTypeDesc]
-,[traitFlashTypeDesc]
-,[integerPrompt]
-,[datePrompt]
-,[stringPrompt]
-,[currencyPrompt]
-,[memoPrompt]
-,[booleanPrompt]
-,[currencyCode]
-,[labelTraitFieldTypeDesc]
-,[dataTraitFieldTypeDesc]
-,[traitGroupId]
-,[traitGroupCode]
-,[traitGroupDesc]
-,[traitGroupDisplayOrder]
-,[traitGroupTypeDesc]
-,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
-,[lastUpdatedByUserId]
-,CAST([createdDate] AS datetime2) AS createdDate
-,[createdByUserId]
-INTO [ToledoWalleye].[staging].[trait_migration_1]
-from [ToledoWalleye].[staging].[trait]
-
--- user
-
-SELECT
- [userId]
-,[firstName]
-,[middleName]
-,[lastName]
-,[formattedName]
-,[userLogin]
-,[activeStatus]
-,CAST([createdDate] AS datetime2) AS createdDate
-,[createdByUserId]
-,CAST([lastUpdatedDate] AS datetime2) AS lastUpdatedDate
-,[lastUpdatedByUserId]
-INTO [ToledoWalleye].[staging].[user_migration_1]
-from [ToledoWalleye].[staging].[user]
-
