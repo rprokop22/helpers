@@ -1,0 +1,29 @@
+{
+  "$schema": "../schemas/config_schema.json",
+  "customer": {
+    "organization": "mp_toledosports",
+    "customer_db": "ToledoWalleye",
+    "property": "echl_walleye"
+  },
+    "source_system":{
+      "tdc": {
+        "table_mappings": {
+          "buyerType_migration_2": "buyer_types",
+          "event_migration_2": "events",
+          "orders_migration_2": "orders",
+          "package_migration_2": "packages",
+          "patronAccount_migration_2": "patron_accounts",
+          "patronContactAddress_migration_2": "patron_contact_addresses",
+          "patronContactEmail_migration_2": "patron_contact_emails",
+          "patronContactPhone_migration_2": "patron_contact_phones",
+          "patronContact_migration_2": "patron_contacts",
+          "patronSalesRep_migration_2": "patron_sales_reps",
+          "priceScale_migration_2": "price_scales",
+          "salesRep_migration_2": "sales_reps",
+          "section_migration_2": "sections",
+          "ticketActivity_migration_2": "ticket_activities"
+        },
+        "column_mappings": {}
+      }
+    }
+  }

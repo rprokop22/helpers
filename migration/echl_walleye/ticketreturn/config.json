@@ -1,0 +1,25 @@
+{
+  "customer": {
+    "organization": "mp_toledosports",
+    "customer_db": "ToledoWalleye",
+    "property": "echl_walleye"
+  },
+  "$schema": "../schemas/config_schema.json",
+    "source_system": {
+      "ticketreturn": {
+        "table_mappings": {
+          "TRcustomerTickets_migrate": "customer_tickets",
+          "TRcustomerTransactions_migrate": "customer_transactions",
+          "TRevents_migrate": "events", 
+          "TRlistPrices_migrate": "list_prices",
+          "TRmanifests_migrate": "manifests",
+          "TRvenues_migrate": "venues"
+        },
+        "column_mappings": {}
+      }
+    }
+  }
+
+
+
+

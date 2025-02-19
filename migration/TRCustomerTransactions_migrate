@@ -1,0 +1,125 @@
+with temp as (SELECT 
+    c.[CustomerID]
+      ,c.[UserID]
+      ,c.[Prefix]
+      ,c.[FirstName]
+      ,c.[MiddleName]
+      ,c.[LastName]
+      ,c.[Suffix]
+      ,c.[Address1] as addr1
+      ,c.[Address2] as addr2
+      ,c.[City]
+      ,c.[State]
+      ,c.[PostalCode] as zip
+      ,c.[EmailAddress] as email
+      ,c.[AccountType] as customertype
+      ,c.[CorpName]
+      ,c.[OwnerType]
+      ,c.[OwnerID]
+      ,c.[SetupOnTR]
+      ,c.[PhoneNumber] as phone
+      ,c.[Priviledges]
+      ,c.[Address2_1]
+      ,c.[Address2_2]
+      ,c.[City2]
+      ,c.[State2]
+      ,c.[PostalCode2]
+      ,c.[Address3_1]
+      ,c.[Address3_2]
+      ,c.[City3]
+      ,c.[State3]
+      ,c.[PostalCode3]
+      ,c.[OldCustomerID]
+      ,c.[PhoneNumber2] as phone2
+      ,c.[PhoneNumber3] as phone3
+      ,c.[Phone2Desc] as phonedesc2
+      ,c.[Phone3Desc] as phonedesc3
+      ,c.[SalesRep]
+      ,c.[UserDefinedNumeric1]
+      ,c.[UserDefinedNumeric2]
+      ,c.[UserDefinedNumeric3]
+      ,c.[UserDefinedNumeric4]
+      ,c.[UserDefinedNumeric5]
+      ,c.[UserDefinedAmt1]
+      ,c.[UserDefinedAmt2]
+      ,c.[UserDefinedAmt3]
+      ,c.[UserDefinedAmt4]
+      ,c.[UserDefinedAmt5]
+      ,c.[UserDefinedText1]
+      ,c.[UserDefinedText2]
+      ,c.[UserDefinedText3]
+      ,c.[UserDefinedText4]
+      ,c.[UserDefinedText5]
+      ,c.[Country]
+      ,c.[Country2]
+      ,c.[Country3]
+      ,c.[UserDefinedNumeric6]
+      ,c.[UserDefinedNumeric7]
+      ,c.[UserDefinedNumeric8]
+      ,c.[UserDefinedNumeric9]
+      ,c.[UserDefinedNumeric10]
+      ,c.[UserDefinedAmt6]
+      ,c.[UserDefinedAmt7]
+      ,c.[UserDefinedAmt8]
+      ,c.[UserDefinedAmt9]
+      ,c.[UserDefinedAmt10]
+      ,c.[UserDefinedText6]
+      ,c.[UserDefinedText7]
+      ,c.[UserDefinedText8]
+      ,c.[UserDefinedText9]
+      ,c.[UserDefinedText10]
+      ,c.[UserDefinedDate1]
+      ,c.[UserDefinedDate2]
+      ,c.[UserDefinedDate3]
+      ,c.[UserDefinedDate4]
+      ,c.[UserDefinedDate5]
+      ,c.[UserDefinedDate6]
+      ,c.[UserDefinedDate7]
+      ,c.[UserDefinedDate8]
+      ,c.[UserDefinedDate9]
+      ,c.[UserDefinedDate10]
+      ,c.[StateOther]
+      ,c.[SalesRepID]
+      ,s.TransactionDate as transactionDate
+      ,s.sellID as transactionID
+      ,c.city as transactionLocation
+      ,c.[PPYTDGivingLevel]
+      ,c.[PPLTDRanking]
+      ,c.[PPLTDMaxRank]
+      ,c.[PPLastRankingDate]
+      ,c.[EmailOptOut]
+      ,c.[EmailOptOutDate]
+      ,c.[PhoneDesc]
+      ,c.[GroupPortalAcct]
+      ,c.[CustomerTypeID]
+      ,c.[FacebookID]
+      ,c.[PPMembershipDateRange]
+      ,c.[CreateDate]
+      ,c.[StateOther2]
+      ,c.[StateOther3]
+      ,c.[SpousePrefix]
+      ,c.[SpouseFirstName]
+      ,c.[SpouseMiddleName]
+      ,c.[SpouseLastName]
+      ,c.[SpouseSuffix]
+      ,c.[TempPasswd]
+      ,c.[TempPasswdExpires]
+      ,c.[VendorID]
+      ,c.[StripeCustomerID]
+      ,c.[DOBDay]
+      ,c.[DOBMonth]
+      ,c.[DOBYear]
+      ,120673 as loadid
+  FROM [Toledo].[onetime].[mudHensSellTbl] s
+left outer join onetime.mudHensEventSeatingTbl e
+    ON e.EventId = s.EventId
+    AND e.SellId = s.SellId
+    AND e.SeatDesignation1= s.SeatDesignation1
+    AND	e.SeatDesignation2= s.SeatDesignation2 
+    AND	e.SeatDesignation3 = s.SeatDesignation3
+    AND	e.SeatDesignation4 = s.SeatDesignation4
+left outer join 
+    onetime.mudHensCustomerTbl c on e.OwnerID = c.CustomerID
+)
+
+select * into ToledoMudHens.staging.TRcustomerTransactions_migrate from temp
