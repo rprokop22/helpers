@@ -45,13 +45,13 @@ if __name__ == '__main__':
     s3 = boto3.resource('s3')
 
     bucket_name = 'stellaralgo-usprod-use1-mp-toledosports'
-    archive_path = 'archive/tdc'
-    backup_path = 'backup/tdc'
+    source_path = 'backup/tdc'
+    destination_path = 'archive/tdc'
     team_name = 'echl_walleye'
 
     bucket= s3.Bucket(bucket_name)
 
-    for obj in bucket.objects.filter(Prefix=archive_path):
+    for obj in bucket.objects.filter(Prefix=source_path):
         print(obj)
 
         source_key = obj.key
@@ -64,9 +64,10 @@ if __name__ == '__main__':
             dataset = source_key.split('/')[2]
             ingestion_datetime = source_key.split('/')[4]
             file = source_key.split('/')[5]
-            destination_key = f'{backup_path}/{dataset}/{ingestion_property}/{ingestion_datetime}/{file}'
+            destination_key = f'{destination_path}/{dataset}/{ingestion_property}/{ingestion_datetime}/{file}'
         
             copy_source = {'Bucket': bucket_name, 'Key': source_key}
             s3.Object(bucket_name, destination_key).copy(copy_source)
             print("Object successfully copied")
     
+    print("Completed copying all files")
