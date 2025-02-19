@@ -45,8 +45,8 @@ if __name__ == '__main__':
     s3 = boto3.resource('s3')
 
     bucket_name = 'stellaralgo-usprod-use1-mp-toledosports'
-    source_path = 'backup/tdc'
-    destination_path = 'archive/tdc'
+    source_path = 'backup/tdc' #directory + source system
+    destination_path = 'archive/tdc' #directory + source system
     team_name = 'echl_walleye'
 
     bucket= s3.Bucket(bucket_name)
