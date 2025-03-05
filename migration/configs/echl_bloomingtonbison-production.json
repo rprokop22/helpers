@@ -1,0 +1,28 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "customerAddress_migration": "customer_addresses",
+        "custemail_migration": "customer_emails",
+        "custrep_migration": "customer_reps",
+        "customer_migration": "customers",
+        "event_migration": "events",
+        "journal_migration": "journals",
+        "priceCode_migration": "price_codes",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "tex_migration": "ticket_exchanges",
+        "ticket_migration": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_bloomingtonbison",
+    "customer_db": "echlBisons",
+    "property": "echl_bloomingtonbison"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

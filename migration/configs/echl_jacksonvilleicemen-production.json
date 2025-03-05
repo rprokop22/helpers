@@ -1,0 +1,37 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "availSeats_migration": "available_seats",
+        "custEmail_migration": "customer_emails",
+        "customer_migration": "customers",
+        "customerAddress_migration": "customer_addresses",
+        "custRep_migration": "customer_reps",
+        "event_migration": "events",
+        "eventsInPlan_migration": "events_in_plans",
+        "invlineitem_migration": "inventory_line_items",
+        "journal_migration": "journals",
+        "paymentScheduleMop_migration": "payment_schedule_mops",
+        "paymentSchedule_migration": "payment_schedules",
+        "plans_migration": "plans",
+        "priceCode_migration": "price_codes",
+        "promoCode_migration": "promotion_codes",
+        "retailEvent_migration": "retail_events",
+        "retailNonTicket_migration": "retail_non_tickets",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "tex_migration": "ticket_exchanges",
+        "ticket_migration": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_jacksonvilleicemen",
+    "customer_db": "echlicemen",
+    "property": "echl_jacksonvilleicemen"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

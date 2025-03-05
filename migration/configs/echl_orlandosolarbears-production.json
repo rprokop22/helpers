@@ -1,0 +1,34 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "availSeats_migration": "available_seats",
+        "custAddress_migration": "customer_addresses",
+        "custEmail_migration": "customer_emails",
+        "customer_migration": "customers",
+        "custRep_migration": "customer_reps",
+        "event_migration": "events",
+        "eventsInPlan_migration": "events_in_plans",
+        "journal_migration": "journals", 
+        "plans_migration": "plans",
+        "priceCode_migration": "price_codes", 
+        "promoCode_migration": "promotion_codes",
+        "retailEvent_migration": "retail_events",
+        "retailNonTicket_migration": "retail_non_tickets",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "ticket_migration": "tickets",
+        "tex_migration": "ticket_exchanges"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_orlandosolarbears",
+    "customer_db": "echlsolarbears",
+    "property": "echl_orlandosolarbears"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

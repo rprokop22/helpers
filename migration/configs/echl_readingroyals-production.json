@@ -1,0 +1,33 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "availSeats_migration": "available_seats",
+        "customerAddress_migration": "customer_addresses",
+        "custEmail_migration": "customer_emails",
+        "custRep_migration": "customer_reps",
+        "customer_migration": "customers",
+        "event_migration": "events",
+        "journal_migration": "journals",
+        "paymentScheduleMop_migration": "payment_schedule_mops",
+        "paymentSchedule_migration": "payment_schedules",
+        "plans_migration": "plans",
+        "priceCode_migration": "price_codes",
+        "promoCode_migration": "promotion_codes",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "tex_migration": "ticket_exchanges",
+        "ticket_migration": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_readingroyals",
+    "customer_db": "echlroyals",
+    "property": "echl_readingroyals"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

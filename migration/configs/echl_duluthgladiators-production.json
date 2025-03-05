@@ -1,0 +1,30 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "availSeats_migration": "available_seats",
+        "custAddress_migration": "customer_addresses",
+        "custEmail_migration": "customer_emails",
+        "custRep_migration": "customer_reps",
+        "customer_migration": "customers",
+        "event_migration": "events",
+        "journal_migration": "journals",
+        "plans_migration": "plans",
+        "priceCode_migration": "price_codes",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "tex_migration": "ticket_exchanges",
+        "ticket_migration": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_duluthgladiators",
+    "customer_db": "echlgladiators",
+    "property": "echl_duluthgladiators"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

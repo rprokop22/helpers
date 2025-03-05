@@ -1,0 +1,33 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "availseats_migration": "available_seats",
+        "customerAddress_migration": "customer_addresses",
+        "custEmail_migration": "customer_emails",
+        "custRep_migration": "customer_reps",
+        "customer_migration": "customers",
+        "event_migration": "events",
+        "eventsInPlan_migration": "events_in_plans",
+        "journal_migration": "journals",
+        "paymentScheduleMop_migration": "payment_schedule_mops",
+        "paymentSchedule_migration": "payment_schedules",
+        "retailEvent_migration": "retail_events",
+        "retailNonTicket_migration": "retail_non_tickets",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "tex_migration": "ticket_exchanges",
+        "ticket_migration": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_cincinnaticyclones",
+    "customer_db": "echlcyclones",
+    "property": "echl_cincinnaticyclones"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

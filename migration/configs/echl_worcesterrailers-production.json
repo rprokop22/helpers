@@ -1,0 +1,39 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration": "arenas",
+        "attendance_migration": "attendances",
+        "availableSeat_migration": "available_seats",
+        "customerAddresse_migration": "customer_addresses",
+        "customerEmail_migration": "customer_emails",
+        "customerMerge_migration": "customer_merges",
+        "customerRep_migration": "customer_reps",
+        "customer_migration": "customers",
+        "event_migration": "events",
+        "eventsInPlan_migration": "events_in_plans",
+        "inventoryLineItem_migration": "inventory_line_items",
+        "journal_migration": "journals",
+        "paymentScheduleMop_migration": "payment_schedule_mops",
+        "paymentSchedulePayment_migration": "payment_schedule_payments",
+        "paymentSchedule_migration": "payment_schedules",
+        "plan_migration": "plans",
+        "priceCode_migration": "price_codes",
+        "promotionCode_migration": "promotion_codes",
+        "retailEvent_migration": "retail_events",
+        "retailNonTicket_migration": "retail_non_tickets",
+        "season_migration": "seasons",
+        "seatManifest_migration": "seat_manifests",
+        "ticketExchange_migration": "ticket_exchanges",
+        "ticket_migration": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_worcesterrailers",
+    "customer_db": "echlrailers",
+    "property": "echl_worcesterrailers"
+  },
+  "$schema": "../schemas/config_schema.json"
+}

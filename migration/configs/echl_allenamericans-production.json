@@ -1,0 +1,35 @@
+{
+  "source_system": {
+    "ticketmaster": {
+      "table_mappings": {
+        "arena_migration_1": "arenas",
+        "attendance_migration_1": "attendances",
+        "availseats_migration_1": "available_seats",
+        "custemail_migration_1": "customer_emails",
+        "custrep_migration_1": "customer_reps",
+        "customer_migration_1": "customers",
+        "event_migration_1": "events",
+        "eventsinplan_migration_1": "events_in_plans",
+        "invlineitem_migration_1": "inventory_line_items",
+        "journal_migration_1": "journals",
+        "paymentschedulemop_migration_1": "payment_schedule_mops",
+        "paymentschedulepayment_migration_1": "payment_schedule_payments",
+        "paymentschedule_migration_1": "payment_schedules",
+        "plans_migration_1": "plans",
+        "pricecode_migration_1": "price_codes",
+        "promocode_migration_1": "promotion_codes",
+        "season_migration_1": "seasons",
+        "seatmanifest_migration_1": "seat_manifests",
+        "tex_migration_1": "ticket_exchanges",
+        "ticket_migration_1": "tickets"
+      },
+      "column_mappings": {}
+    }
+  },
+  "customer": {
+    "organization": "echl_allenamericans",
+    "customer_db": "echlAmericans",
+    "property": "echl_allenamericans"
+  },
+  "$schema": "../schemas/config_schema.json"
+}
