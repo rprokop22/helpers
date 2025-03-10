@@ -11,7 +11,6 @@
         "customer_migration": "customers",
         "event_migration": "events",
         "journal_migration": "journals",
-        "plans_migration": "plans",
         "priceCode_migration": "price_codes",
         "season_migration": "seasons",
         "seatManifest_migration": "seat_manifests",
