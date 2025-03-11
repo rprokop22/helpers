@@ -21,6 +21,7 @@
         "seatManifest_migration": "seat_manifests",
         "ticket_migration": "tickets",
         "tex_migration": "ticket_exchanges"
+        
       },
       "column_mappings": {}
     }
@@ -32,3 +33,15 @@
   },
   "$schema": "../schemas/config_schema.json"
 }
+
+
+
+
+customers
+customer_reps
+events
+journals 
+tickets
+ticket_exchanges
+seasons
+plans
