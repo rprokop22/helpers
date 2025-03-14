@@ -27,3 +27,20 @@
   },
   "$schema": "../schemas/config_schema.json"
 }
+
+
+
+arenas
+attendances
+available_seats
+customer_addresses
+customer_emails
+customer_reps
+customers
+events
+journals
+price_codes
+seasons
+seat_manifests
+ticket_exchanges
+tickets
