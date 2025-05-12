@@ -255,9 +255,8 @@ CASE
 END
 ```
 
-## Jacksonville Icemen
 
-### Product mapping notes
+## Jacksonville Icemen
 - Flex plan in the cdp under source product show lots of half season & mini plan 
     - this looks to be mostly because the plan type is flex plan
 - Suites 
