@@ -3,7 +3,7 @@
 
 
 ## Assumptions:
-- keyword PACK is a group (as opposed to Mini or Flex plans)
+- keyword PACK is bucketed as group (as opposed to Mini or Flex plans)
 - 6 game, 9 game, 12 game keywords are mini plan
 - Hierarchy of product mapping is as follows:
     - Comp
@@ -21,13 +21,15 @@
     the columns hierarchy :
     - pe.event_type first,
     - followed by t.price_code_desc, t.ticket_type, t.price_code_group all of equal value
+- LOGE tickets are being mapped to Suite
 
 
 
 ## Allen Americans
-- some price codes of `CFSF`, `CHSR`, `BHSR`, `DHSR` are bucketed as full season
-    - this is because the price_code_group says `Season Tickets` and plan_type is `full season`
-    - some are half season where plan_type is `half season`
+- some price codes of `CFSF`, `CHSR`, `BHSR`, `DHSR`, `CHSN` are bucketed as full season
+    - this is because the price_code_group says `Season Tickets` and plan_type is `full season` total of about 1500 tickets
+    ![americans-full-half-2](americans-full-half-2.png)
+    - some are half season where plan_type is `half season` - total of 556 tickets
     - To me, the logic of price codes `.HS.` says to be Half season, but it looks like their data is inconsistent
     ![americans-full-half](americans-full-half.png)
 - Single letter price codes are in many buckets
@@ -95,58 +97,6 @@ END
 ```
 
 
-## Cincinnati Cyclones (manual Mapping)
-- 	Field Trip Day & Fundraising tickets were put into Group
-
-DBT Mapping:
-```
-CASE
-    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)comp') 
-    OR REGEXP_LIKE(t.ticket_type, '(?i)comp') 
-    OR REGEXP_LIKE(t.price_code_group, '(?i)comp') 
-    OR TRY_CAST(t.block_purchase_price as int) = 0 
-        THEN 'Comp'
-    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(suite|loge)')
-    OR REGEXP_LIKE(t.ticket_type, '(?i)(suite|loge)')
-    OR REGEXP_LIKE(t.price_code_group, '(?i)(suite|loge)')
-        THEN 'Suite'
-    WHEN REGEXP_LIKE(pe.event_type, '(?i)Full Season') THEN 'Full Season'
-    WHEN REGEXP_LIKE(pe.event_type, '(?i)Half Season') THEN 'Half Season'
-    WHEN REGEXP_LIKE(pe.event_type, '(?i)Mini.Plan') THEN 'Mini Plan'
-    WHEN REGEXP_LIKE(pe.event_type, '(?i)Flex Plan') THEN 'Flex Plan'
-    WHEN (
-    REGEXP_LIKE(t.price_code_desc, '(?i)(full|season ti)') 
-        OR REGEXP_LIKE(t.ticket_type, '(?i)(full|season ti)') 
-        OR REGEXP_LIKE(t.price_code_group, '(?i)(full|season ti)')
-    ) AND NOT (
-    REGEXP_LIKE(t.price_code_desc, '(?i)(half|mini|group|flex|full price)') 
-        OR REGEXP_LIKE(t.ticket_type, '(?i)(half|mini|group|flex|full price)') 
-        OR REGEXP_LIKE(t.price_code_group, '(?i)(half|mini|group|flex|full price)')
-    )
-        THEN 'Full Season'
-    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(half|24 Game|18 Game)') 
-    OR REGEXP_LIKE(t.ticket_type, '(?i)half') 
-    OR REGEXP_LIKE(t.price_code_group, '(?i)half')
-        THEN 'Half Season'
-    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(six game|12 game|mini.plan)') 
-    OR REGEXP_LIKE(t.ticket_type, '(?i)(six game|twelve game|12 game|mini.plan)')
-    OR REGEXP_LIKE(t.price_code_group, '(?i)mini.plan') 
-        THEN 'Mini Plan'
-    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)flex') 
-    OR REGEXP_LIKE(t.ticket_type, '(?i)flex') 
-    OR REGEXP_LIKE(t.price_code_group, '(?i)flex')
-        THEN 'Flex Plan'
-    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(group|Fevo|Spinzo|fundraising|field trip day)') 
-    OR REGEXP_LIKE(t.ticket_type, '(?i)(group|pack|FEVO|Spinzo|fundraising|field trip day)')
-    OR REGEXP_LIKE(t.price_code_group, '(?i)(group|fevo|spinzo)')
-        THEN 'Group'
-    WHEN REGEXP_LIKE(t.ticket_type, '(?i)(Adult|military|SPECIAL|ticket)')
-    OR REGEXP_LIKE(t.price_code_desc, '(?i)(Adult|Regular Seats|special|day of|costco|standard|Exchange|Arena Seat|Gov X|GovX)')
-        THEN 'Individual'
-    ELSE 'Not Mapped'
-END
-```
-
 ## Atlanta Gladiators
 - Look good. No notes
 
@@ -203,8 +153,105 @@ CASE
 END
 ```
 
-## Fisher Indy Fuel (manual mapping)
--  
+## Bloomington Bison
+
+
+```
+CASE
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)comp') or REGEXP_LIKE(t.ticket_type, '(?i)comp') or REGEXP_LIKE(t.price_code_group, '(?i)comp') or TRY_CAST(t.block_purchase_price as int) = 0 
+        THEN 'Comp'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)suite') OR REGEXP_LIKE(t.ticket_type, '(?i)suite') OR REGEXP_LIKE(t.price_code_group, '(?i)suite')
+    THEN 'Suite'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Full Season') THEN 'Full Season'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Half Season') THEN 'Half Season'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Mini.Plan') THEN 'Mini Plan'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Flex Plan') THEN 'Flex Plan'
+    WHEN (
+    REGEXP_LIKE(t.price_code_desc, '(?i)(full|season ti)') 
+        OR REGEXP_LIKE(t.ticket_type, '(?i)(full|season ti)') 
+        OR REGEXP_LIKE(t.price_code_group, '(?i)(full|season ti)')
+    ) AND NOT (
+    REGEXP_LIKE(t.price_code_desc, '(?i)(half|mini|group|flex)') 
+        OR REGEXP_LIKE(t.ticket_type, '(?i)(half|mini|group|flex)') 
+        OR REGEXP_LIKE(t.price_code_group, '(?i)(half|mini|group|flex)')
+    )
+        THEN 'Full Season'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)half') OR REGEXP_LIKE(t.ticket_type, '(?i)half') OR REGEXP_LIKE(t.price_code_group, '(?i)half')
+    THEN 'Half Season'
+    WHEN t.price_code in ('4PKA', 'EPKA', 'BOW', 'BLW')
+    THEN 'Partial Plan'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(six game|12 game|mini.plan)') OR REGEXP_LIKE(t.ticket_type, '(?i)(six game|12 game|mini.plan)') OR REGEXP_LIKE(t.price_code_group, '(?i)(six game|12 game|mini.plan)') OR t.price_code in ('E4PA')
+    THEN 'Mini Plan'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)flex') OR REGEXP_LIKE(t.ticket_type, '(?i)flex') OR REGEXP_LIKE(t.price_code_group, '(?i)flex') OR t.price_code in ('BOX2', 'BSP')
+    THEN 'Flex Plan'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)group') OR REGEXP_LIKE(t.ticket_type, '(?i)(group|FEVO|Spinzo)') OR REGEXP_LIKE(t.price_code_group, '(?i)group') OR t.price_code in ('FBLM', 'E87', 'EU5', 'ESN')
+    THEN 'Group'
+    WHEN REGEXP_LIKE(t.ticket_type, '(?i)Adult') OR t.price_code in ('BBF', 'EGP', 'BGP2', 'CGP2', 'CSP', 'ENP', 'ESP', 'CSC', 'GRI2', 'BSD', 'AGP2', 'DOG', 'ESR', 'GRI', 'CGP', 'BGP', 'DSP', 'AGP', 'DASH', 'DGP', 'BOX', 'ESG', 'DHT', 'BHF', 'DOW', 'GRI3', 'BSG', 'CMM', 'B', 'GGP', 'CSG', 'CPP', 'C', 'CSR', 'SFV')
+    THEN 'Individual'
+    ELSE 'Not Mapped'
+END
+```
+
+## Cincinnati Cyclones (manual Mapping)
+- 	Field Trip Day & Fundraising tickets were put into Group
+
+DBT Mapping:
+```
+CASE
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)comp') 
+    OR REGEXP_LIKE(t.ticket_type, '(?i)comp') 
+    OR REGEXP_LIKE(t.price_code_group, '(?i)comp') 
+    OR TRY_CAST(t.block_purchase_price as int) = 0 
+        THEN 'Comp'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(suite|loge)')
+    OR REGEXP_LIKE(t.ticket_type, '(?i)(suite|loge)')
+    OR REGEXP_LIKE(t.price_code_group, '(?i)(suite|loge)')
+        THEN 'Suite'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Full Season') THEN 'Full Season'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Half Season') THEN 'Half Season'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Mini.Plan') THEN 'Mini Plan'
+    WHEN REGEXP_LIKE(pe.event_type, '(?i)Flex Plan') THEN 'Flex Plan'
+    WHEN (
+    REGEXP_LIKE(t.price_code_desc, '(?i)(full|season ti)') 
+        OR REGEXP_LIKE(t.ticket_type, '(?i)(full|season ti)') 
+        OR REGEXP_LIKE(t.price_code_group, '(?i)(full|season ti)')
+    ) AND NOT (
+    REGEXP_LIKE(t.price_code_desc, '(?i)(half|mini|group|flex|full price)') 
+        OR REGEXP_LIKE(t.ticket_type, '(?i)(half|mini|group|flex|full price)') 
+        OR REGEXP_LIKE(t.price_code_group, '(?i)(half|mini|group|flex|full price)')
+    )
+        THEN 'Full Season'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(half|24 Game|18 Game)') 
+    OR REGEXP_LIKE(t.ticket_type, '(?i)half') 
+    OR REGEXP_LIKE(t.price_code_group, '(?i)half')
+        THEN 'Half Season'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(six game|12 game|mini.plan)') 
+    OR REGEXP_LIKE(t.ticket_type, '(?i)(six game|twelve game|12 game|mini.plan)')
+    OR REGEXP_LIKE(t.price_code_group, '(?i)mini.plan') 
+        THEN 'Mini Plan'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)flex') 
+    OR REGEXP_LIKE(t.ticket_type, '(?i)flex') 
+    OR REGEXP_LIKE(t.price_code_group, '(?i)flex')
+        THEN 'Flex Plan'
+    WHEN REGEXP_LIKE(t.price_code_desc, '(?i)(group|Fevo|Spinzo|fundraising|field trip day)') 
+    OR REGEXP_LIKE(t.ticket_type, '(?i)(group|pack|FEVO|Spinzo|fundraising|field trip day)')
+    OR REGEXP_LIKE(t.price_code_group, '(?i)(group|fevo|spinzo)')
+        THEN 'Group'
+    WHEN REGEXP_LIKE(t.ticket_type, '(?i)(Adult|military|SPECIAL|ticket)')
+    OR REGEXP_LIKE(t.price_code_desc, '(?i)(Adult|Regular Seats|special|day of|costco|standard|Exchange|Arena Seat|Gov X|GovX)')
+        THEN 'Individual'
+    ELSE 'Not Mapped'
+END
+```
+
+
+## Greensboro Gargoyles
+
+## Greenville Swamp Rabbits
+- Full season looks off due to plan_type = full season on many tickets
+
+## Indy Fuel (manual mapping)
+- no major notes except the lack of clarity of some products due to plan_type
 
 DBT Mapping:
 ```
@@ -256,14 +303,14 @@ END
 ```
 
 
-## Jacksonville Icemen
+<!-- ## Jacksonville Icemen
 - Flex plan in the cdp under source product show lots of half season & mini plan 
     - this looks to be mostly because the plan type is flex plan
 - Suites 
     - source product of group, price code desc as loge
         - Should groups be mapped prior to suites?
 
-## Savannah Ghost Pirates
+## Savannah Ghost Pirates -->
 - price codes are in multiple different products, 
     for example ![group vs full season ](image.png)
     both share the price code of GG, but only some are associated to a plan type of full season
