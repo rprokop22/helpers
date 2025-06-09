@@ -25,7 +25,7 @@ SELECT
       ,[AccountName]
       ,[loadid]
       ,[filename]
-INTO [echlRush].[staging].[account_migration]
+INTO [echlRush].[staging].[paciolanAccount_migration]
 FROM [echlRush].[staging].[paciolanAccount]
 
 
