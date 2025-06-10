@@ -3,40 +3,40 @@ use echlRush
 --accounts
 
 SELECT
-    [AccountID]
-      ,[UpdatedDateTime]
-      ,[InternetProfile]
-      ,[SystemStatus]
-      ,[OriginationTime]
-      ,[PrimaryTicketingRepUserID]
-      ,[PrimaryGeneralRepUserID]
-      ,[PrimaryFundRepUserID]
-      ,[PrimaryContactID]
-      ,[Status]
-      ,[PreferredPhoneTypeCode]
-      ,[PreferredEmail]
-      ,[PreferredContactMethod]
-      ,[PreferredContactMethodCode]
-      ,[Announcement]
-      ,[LastName]
-      ,[FirstName]
-      ,[AccountType]
-      ,[AccountTypeCode]
-      ,[AccountName]
-      ,[loadid]
-      ,[filename]
+   [AccountID],
+  [AccountName],
+  [AccountType],
+  [AccountTypeCode],
+  [Announcement],
+  [FirstName],
+  [InternetProfile],
+  [LastName],
+  CAST([OriginationTime] AS datetime2) AS OriginationTime,
+  [PreferredContactMethod],
+  [PreferredContactMethodCode],
+  [PreferredEmail],
+  [PreferredPhoneTypeCode],
+  [PrimaryContactID],
+  [PrimaryFundRepUserID],
+  [PrimaryGeneralRepUserID],
+  [PrimaryTicketingRepUserID],
+  [Status],
+  [SystemStatus],
+  CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime,
+  [filename],
+  [loadid]
 INTO [echlRush].[staging].[paciolanAccount_migration]
 FROM [echlRush].[staging].[paciolanAccount]
 
 
 --- accountMerge
 SELECT 
-     [ParentAccountDbID]
-      ,[UpdatedDateTime]
-      ,[MergeAccountID]
-      ,[ParentAccountID]
+      [filename] 
       ,[loadid]
-      ,[filename] 
+      ,[MergeAccountID]
+      ,[ParentAccountDbID]
+      ,[ParentAccountID]
+      ,CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime
 INTO [echlRush].[staging].[paciolanAccountMerge_migration]
 FROM [echlRush].[staging].[paciolanAccountMerge]
   
@@ -44,66 +44,66 @@ FROM [echlRush].[staging].[paciolanAccountMerge]
 
 --- addresstype
 SELECT 
-[AccountID]
-      ,[UpdatedDateTime]
-      ,[SystemStatus]
-      ,[RegionName]
-      ,[RegionID]
-      ,[Country]
-      ,[ZipCode]
-      ,[State]
-      ,[County]
-      ,[City]
-      ,[Address3]
-      ,[Address2]
-      ,[Address1]
-      ,[CareOf]
-      ,[MailName]
-      ,[AddressType]
-      ,[AddressTypeCode]
-      ,[loadid]
-      ,[filename]
+ [AccountID],
+ [Address1],
+  [Address2],
+  [Address3],
+  [AddressType],
+  [AddressTypeCode],
+  [CareOf],
+  [City],
+  [Country],
+  [County],
+  [MailName],
+  [RegionID],
+  [RegionName],
+  [State],
+  [SystemStatus],
+  CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime,
+  [ZipCode],
+  [filename],
+  [loadid]
 FROM [echlRush].[staging].[paciolanAddressType]
 INTO [echlRush].[staging].[paciolanAddressType_migration]
 
 
 --- barcode
 SELECT 
-[Barcode]
-      ,[LastUpdate]
-      ,[Scanned]
-      ,[ScanResponseCode]
-      ,[ScanGate]
-      ,[ScanCluster]
-      ,[ScanLocation]
-      ,[ScanDateTime]
-      ,[Seat]
-      ,[Row]
-      ,[Section]
-      ,[Level]
-      ,[PriceLevelCode]
-      ,[PriceTypeCode]
-      ,[EventCode]
-      ,[ItemCode]
-      ,[SeasonCode]
-      ,[StatusName]
-      ,[StatusCode]
-      ,[AccountID]
-      ,[loadid]
-      ,[filename]
+[AccountID],
+[Barcode],
+[EventCode],
+[ItemCode],
+CAST([LastUpdate] AS datetime2) AS LastUpdate,
+[Level],
+[PriceLevelCode],
+[PriceTypeCode],
+[Row],
+[ScanCluster],
+CAST([ScanDateTime] AS datetime2) AS ScanDateTime,
+[ScanGate],
+[ScanLocation],
+[ScanResponseCode],
+[Scanned],
+[SeasonCode],
+[Seat],
+[Section],
+[StatusCode],
+[StatusName],
+[filename],
+[loadid]
 FROM [echlRush].[staging].[paciolanBarcode]
 INTO [echlRush].[staging].[paciolanBarcode_migration]
 
 
 --- billplantype
 SELECT 
-[SeasonCode]
-      ,[LastUpdate]
-      ,[BillPlanPercentage]
-      ,[BillPlanDate]
-      ,[BillPlanTypeName]
-      ,[VMC]
+      [BillPlanPercentage]
+      ,CAST([billplandate] AS datetime2) AS billplandate
       ,[BillPlanTypeCode]
+      ,[BillPlanTypeName]
+      ,CAST([LastUpdate] AS datetime2) AS LastUpdate
+      ,[SeasonCode]
+      ,[VMC]
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanBillPlanType]
@@ -113,19 +113,19 @@ INTO [echlRush].[staging].[paciolanBillPlanType_migration]
 --- contact
 SELECT 
 [AccountID]
-      ,[UpdatedDateTime]
-      ,[SystemStatus]
-      ,[BirthDate]
-      ,[NickName]
-      ,[Suffix]
-      ,[LastName]
-      ,[MiddleName]
-      ,[FirstName]
-      ,[Title]
-      ,[IsPrimaryContact]
-      ,[ContactID]
-      ,[loadid]
-      ,[filename]
+,CAST([BirthDate] AS datetime2) AS BirthDate
+,[ContactID]
+,[FirstName]
+,[IsPrimaryContact]
+,[lastName]
+,[MiddleName]
+,[NickName]
+,[Suffix]
+,[SystemStatus]
+,[Title]
+,CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime
+,[filename]
+,[loadid]
 FROM [echlRush].[staging].[paciolanContact]
 INTO [echlRush].[staging].[paciolanContact_migration]
 
@@ -133,11 +133,11 @@ INTO [echlRush].[staging].[paciolanContact_migration]
 --- email
 SELECT 
 [AccountID]
-      ,[UpdateDateTime]
-      ,[SystemStatus]
       ,[EmailAddress]
       ,[EmailAddrType]
       ,[EmailAddrTypeCode]
+      ,[SystemStatus]
+      ,CAST([UpdateDateTime] AS datetime2) AS UpdateDateTime
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanEmail]
@@ -146,122 +146,122 @@ INTO [echlRush].[staging].[paciolanEmail_migration]
 
 --- event
 SELECT 
-[SeasonCode]
-      ,[OrderQty]
-      ,[OrderAmt]
-      ,[LastUpdate]
-      ,[SeatsComp]
-      ,[SeatsKilled]
-      ,[SeatsHeld]
-      ,[SeatsPrinted]
-      ,[SeatsAllocated]
-      ,[SeatsRemaining]
-      ,[Capacity]
-      ,[EventConfigName]
-      ,[EventConfigCode]
-      ,[FacilityName]
-      ,[FacilityCode]
-      ,[EventClassName]
-      ,[EventClassCode]
-      ,[EventGroupName]
-      ,[EventGroupCode]
-      ,[EventDateTime]
-      ,[EventBasisName]
-      ,[BasisCode]
-      ,[EventTypeName]
-      ,[EventTypeCode]
-      ,[EventName]
-      ,[EventCode]
-      ,[loadid]
-      ,[filename]
+[BasisCode]
+,[Capacity]
+,[EventBasisName]
+,[EventClassCode]
+,[EventClassName]
+,[EventCode]
+,[EventConfigCode]
+,[EventConfigName]
+,CAST([eventdatetime] AS datetime2) AS eventdatetime
+,[EventGroupCode]
+,[EventGroupName]
+,[EventName]
+,[EventTypeCode]
+,[EventTypeName]
+,[FacilityCode]
+,[FacilityName]
+,CAST([LastUpdate] AS datetime2) AS LastUpdate
+,[OrderAmt]
+,[OrderQty]
+,[SeasonCode]
+,[SeatsAllocated]
+,[SeatsComp]
+,[SeatsHeld]
+,[SeatsKilled]
+,[SeatsPrinted]
+,[SeatsRemaining]
+,[filename]
+,[loadid]
 FROM [echlRush].[staging].[paciolanEvent]
 INTO [echlRush].[staging].[paciolanEvent_migration]
 
 
 --- eventorderdetail
 SELECT 
-[SeasonCode]
-      ,[SurchargePayAmount]
-      ,[SurchargeAmount]
-      ,[SurchargeCode]
-      ,[TicketChargePayAmount]
-      ,[TicketChargeAmount]
-      ,[TicketChargePrice]
-      ,[TicketChargeName]
-      ,[TicketChargeCode]
-      ,[FacilityFeePayAmount]
-      ,[FacilityFeeAmount]
-      ,[FacilityFeePrice]
-      ,[SeatBlocks]
-      ,[InternetRefSource]
-      ,[InternetRefData]
-      ,[SalcodeCode]
-      ,[BillPlanTypeCode]
-      ,[PriceLevelCode]
-      ,[PriceTypeCode]
-      ,[EventPayAmount]
-      ,[EventPrice]
-      ,[EventQuantity]
-      ,[EventCode]
-      ,[VMC]
-      ,[SEQ]
-      ,[AccountId]
-      ,[loadid]
-      ,[filename]
+[AccountId],
+[BillPlanTypeCode],
+[EventCode],
+[EventPayAmount],
+[EventPrice],
+[EventQuantity],
+[FacilityFeeAmount],
+[FacilityFeePayAmount],
+[FacilityFeePrice],
+[InternetRefData],
+[InternetRefSource],
+[PriceLevelCode],
+[PriceTypeCode],
+[SEQ],
+[SalcodeCode],
+[SeasonCode],
+[SeatBlocks],
+[SurchargeAmount],
+[SurchargeCode],
+[SurchargePayAmount],
+[TicketChargeAmount],
+[TicketChargeCode],
+[TicketChargeName],
+[TicketChargePayAmount],
+[TicketChargePrice],
+[VMC],
+[filename],
+[loadid]
 FROM [echlRush].[staging].[paciolanEventOrderDetail]
 INTO [echlRush].[staging].[paciolanEventOrderDetail_migration]
 
 
 --- item order detail
 SELECT 
-[SeasonCode]
-      ,[EventCodes]
-      ,[SurchargePayAmount]
-      ,[SurchargeAmount]
-      ,[SurchargeCode]
-      ,[TicketChargePayAmount]
-      ,[TicketChargeAmount]
-      ,[TicketChargePrice]
-      ,[TicketChargeName]
-      ,[TicketChargeCode]
-      ,[FacilityFeePayAmount]
-      ,[FacilityFeeAmount]
-      ,[FacilityFeePrice]
-      ,[FirstEventSeatBlocks]
-      ,[MarkName]
-      ,[MarkCode]
-      ,[AssocAccountId]
-      ,[DiscountAmount]
-      ,[DiscountName]
-      ,[DiscountCode]
-      ,[DispositionName]
-      ,[DispositionCode]
-      ,[PromoName]
-      ,[PromoCode]
-      ,[InternetRefSource]
-      ,[InternetRefData]
-      ,[SalcodeCode]
-      ,[BillPlanTypeCode]
-      ,[PriceLevelCode]
-      ,[PriceTypeCode]
-      ,[ItemPayAmount]
-      ,[ItemPrice]
-      ,[ItemQuantity]
-      ,[ItemCode]
-      ,[Date]
-      ,[SEQ]
-      ,[AccountId]
-      ,[loadid]
-      ,[filename]
+[AccountId],
+[AssocAccountId],
+[BillPlanTypeCode],
+CAST([Date] AS datetime2) AS Date,
+[DiscountAmount],
+[DiscountCode],
+[DiscountName],
+[DispositionCode],
+[DispositionName],
+[EventCodes],
+[FacilityFeeAmount],
+[FacilityFeePayAmount],
+[FacilityFeePrice],
+[FirstEventSeatBlocks],
+[InternetRefData],
+[InternetRefSource],
+[ItemCode],
+[ItemPayAmount],
+[ItemPrice],
+[ItemQuantity],
+[MarkCode],
+[MarkName],
+[PriceLevelCode],
+[PriceTypeCode],
+[PromoCode],
+[PromoName],
+[SEQ],
+[SalcodeCode],
+[SeasonCode],
+[SurchargeAmount],
+[SurchargeCode],
+[SurchargePayAmount],
+[TicketChargeAmount],
+[TicketChargeCode],
+[TicketChargeName],
+[TicketChargePayAmount],
+[TicketChargePrice],
+[filename],
+[loadid]
 FROM [echlRush].[staging].[paciolanItemOrderDetail]
 INTO [echlRush].[staging].[paciolanItemOrderDetail_migration]
 
 
 --- odetdelete
 SELECT 
-[SeasonCode]
+      [AccountID]
+      ,[SeasonCode]
       ,[SEQ_DEL]
-      ,[AccountID]
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanOdetDelete]
@@ -269,13 +269,13 @@ INTO [echlRush].[staging].[paciolanOdetDelete_migration]
 
 --- phone
 SELECT 
-[AccountID]
-      ,[UpdateDateTime]
-      ,[SystemStatus]
-      ,[PhoneNumber]
+    [AccountID]
       ,[DoNotCall]
+      ,[PhoneNumber]
       ,[PhoneType]
       ,[PhoneTypeCode]
+      ,[SystemStatus]
+      ,CAST([UpdateDateTime] AS datetime2) AS UpdateDateTime
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanPhone]
@@ -284,11 +284,11 @@ INTO [echlRush].[staging].[paciolanPhone_migration]
 
 --- pricelevel
 SELECT 
-[SeasonCode]
-      ,[LastUpdate]
+      [ItemCode]
+      ,CAST([LastUpdate] AS datetime2) AS LastUpdate
       ,[PriceLevelName]
       ,[PriceLevelCode]
-      ,[ItemCode]
+      ,[SeasonCode]
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanPriceLevel]
@@ -297,13 +297,13 @@ INTO [echlRush].[staging].[paciolanPriceLevel_migration]
 
 --- season
 SELECT 
-[SeasonCode]
-      ,[LastUpdate]
-      ,[Status]
-      ,[PrevSeasonCode]
+      [ActivityCode]
       ,[ActivityName]
-      ,[ActivityCode]
+      ,CAST([LastUpdate] AS datetime2) AS LastUpdate
+      ,[PrevSeasonCode]
+      ,[SeasonCode]
       ,[SeasonName]
+      ,[Status]
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanSeason]
@@ -312,48 +312,48 @@ INTO [echlRush].[staging].[paciolanSeason_migration]
 
 --- seats
 SELECT 
-[LastUpdate]
-      ,[SoldPrice]
-      ,[AreaName]
-      ,[AreaCode]
-      ,[Gate]
-      ,[Aisle]
-      ,[ReservedForMP]
-      ,[Barcode]
-      ,[PriceLevelCode]
-      ,[PriceTypeCode]
-      ,[ItemCode]
-      ,[AccountId]
-      ,[OrderDetailKey]
-      ,[PreviousSeatStatusCode]
-      ,[SeatStatusName]
-      ,[SeatStatusCode]
-      ,[Seat]
-      ,[VMC]
-      ,[Row]
-      ,[Section]
-      ,[Level]
-      ,[EventCode]
-      ,[SeasonCode]
-      ,[loadid]
-      ,[filename]
+[AccountId],
+[Aisle],
+[AreaCode],
+[AreaName],
+[Barcode],
+[EventCode],
+[Gate],
+[ItemCode],
+CAST([LastUpdate] AS datetime2) AS LastUpdate,
+[Level],
+[OrderDetailKey],
+[PreviousSeatStatusCode],
+[PriceLevelCode],
+[PriceTypeCode],
+[ReservedForMP],
+[Row],
+[SeasonCode],
+[Seat],
+[SeatStatusCode],
+[SeatStatusName],
+[Section],
+[SoldPrice],
+[VMC],
+[filename],
+[loadid]
 FROM [echlRush].[staging].[paciolanSeat]
 INTO [echlRush].[staging].[paciolanSeat_migration]
 
 
 --- stubhub
 SELECT 
-[SeasonCode]
-      ,[ResaleValue]
-      ,[OriginalTicketAmount]
-      ,[SeatBlock]
-      ,[Quantity]
+      [AccountId]
       ,[EventCode]
+      ,[OriginalTicketAmount]
+      ,[Quantity]
+      ,CAST([ResaleDate] AS datetime2) AS ResaleDate
+      ,[ResaleValue]
       ,[SalecodeCode]
-      ,[ResaleDate]
-      ,[TransType]
-      ,[AccountId]
+      ,[SeasonCode]
+      ,[SeatBlock]
       ,[TransNumber]
+      ,[TransType]
       ,[loadid]
       ,[filename]
 FROM [echlRush].[staging].[paciolanStubhub]
@@ -362,41 +362,41 @@ INTO [echlRush].[staging].[paciolanStubhub_migration]
 
 --- transitemevents
 SELECT 
-[SeasonCode]
-      ,[SeatBlocks]
-      ,[SurchargePayAmount]
-      ,[SurchargeAmount]
-      ,[SurchargeCode]
-      ,[TicketChargePayAmount]
-      ,[TicketChargeAmount]
-      ,[TicketChargePrice]
-      ,[TicketChargeName]
-      ,[TicketChargeCode]
-      ,[FacilityFeePayAmount]
-      ,[FacilityFeeAmount]
-      ,[FacilityFeePrice]
-      ,[EventPayAmount]
-      ,[EventAmount]
-      ,[EventPrice]
-      ,[EventQuantity]
-      ,[TransActivityType]
-      ,[TransActivityName]
-      ,[TransActivityCode]
-      ,[InternetRefSource]
-      ,[InternetRefData]
-      ,[SalcodeCode]
-      ,[BillPlanTypeCode]
-      ,[PriceLevelCode]
-      ,[PriceTypeCode]
-      ,[ItemCode]
-      ,[EventCode]
-      ,[Date]
-      ,[AccountId]
-      ,[SVMC]
-      ,[VMC]
-      ,[TransNumber]
-      ,[loadid]
-      ,[filename]
+[AccountId],
+[BillPlanTypeCode],
+CAST([Date] AS datetime2) AS Date,
+[EventAmount],
+[EventCode],
+[EventPayAmount],
+[EventPrice],
+[EventQuantity],
+[FacilityFeeAmount],
+[FacilityFeePayAmount],
+[FacilityFeePrice],
+[InternetRefData],
+[InternetRefSource],
+[ItemCode],
+[PriceLevelCode],
+[PriceTypeCode],
+[SVMC],
+[SalcodeCode],
+[SeasonCode],
+[SeatBlocks],
+[SurchargeAmount],
+[SurchargeCode],
+[SurchargePayAmount],
+[TicketChargeAmount],
+[TicketChargeCode],
+[TicketChargeName],
+[TicketChargePayAmount],
+[TicketChargePrice],
+[TransActivityCode],
+[TransActivityName],
+[TransActivityType],
+[TransNumber],
+[VMC],
+[filename],
+[loadid]
 FROM [echlRush].[staging].[paciolanTransItemEvent]
 INTO [echlRush].[staging].[paciolanTransItemEvent_migration]
 
@@ -404,46 +404,46 @@ INTO [echlRush].[staging].[paciolanTransItemEvent_migration]
 --- transitems
 
 SELECT 
-[SeasonCode]
-      ,[SurchargePayAmount]
-      ,[SurchargeAmount]
-      ,[SurchargeCode]
-      ,[TicketChargePayAmount]
-      ,[TicketChargeAmount]
-      ,[TicketChargePrice]
-      ,[TicketChargeName]
-      ,[TicketChargeCode]
-      ,[FacilityFeePayAmount]
-      ,[FacilityFeeAmount]
-      ,[FacilityFeePrice]
-      ,[ItemPayAmount]
-      ,[ItemAmount]
-      ,[ItemPrice]
-      ,[ItemQuantity]
-      ,[TransActivityType]
-      ,[TransActivityName]
-      ,[TransActivityCode]
-      ,[AssocAccountId]
-      ,[DiscountAmount]
-      ,[DiscountName]
-      ,[DiscountCode]
-      ,[DispositionName]
-      ,[DispositionCode]
-      ,[PromoName]
-      ,[PromoCode]
-      ,[InternetRefSource]
-      ,[InternetRefData]
-      ,[SalcodeCode]
-      ,[BillPlanTypeCode]
-      ,[PriceLevelCode]
-      ,[PriceTypeCode]
-      ,[ItemCode]
-      ,[Date]
-      ,[AccountId]
-      ,[VMC]
-      ,[TransNumber]
-      ,[loadid]
-      ,[filename]
+[AccountId],
+[AssocAccountId],
+[BillPlanTypeCode],
+CAST([Date] AS datetime2) AS Date,
+[DiscountAmount],
+[DiscountCode],
+[DiscountName],
+[DispositionCode],
+[DispositionName],
+[FacilityFeeAmount],
+[FacilityFeePayAmount],
+[FacilityFeePrice],
+[InternetRefData],
+[InternetRefSource],
+[ItemAmount],
+[ItemCode],
+[ItemPayAmount],
+[ItemPrice],
+[ItemQuantity],
+[PriceLevelCode],
+[PriceTypeCode],
+[PromoCode],
+[PromoName],
+[SalcodeCode],
+[SeasonCode],
+[SurchargeAmount],
+[SurchargeCode],
+[SurchargePayAmount],
+[TicketChargeAmount],
+[TicketChargeCode],
+[TicketChargeName],
+[TicketChargePayAmount],
+[TicketChargePrice],
+[TransActivityCode],
+[TransActivityName],
+[TransActivityType],
+[TransNumber],
+[VMC],
+[filename],
+[loadid]
 FROM [echlRush].[staging].[paciolanTransItem]
 INTO [echlRush].[staging].[paciolanTransItem_migration]
 

@@ -1,21 +1,50 @@
 const arr = [
-  "staging.arena",
-  "staging.attendance",
-  "staging.event",
-  "staging.plans",
-  "staging.pricecode",
-  "staging.season",
-  "staging.seatManifest",
-  "staging.tex",
-  "staging.ticket",
-  "staging.customer",
-  "staging.journal",
-  "staging.custRep",
-  "staging.customeraddress",
-  "staging.custemail"
+'SeasonCode'
+      ,'SurchargePayAmount'
+      ,'SurchargeAmount'
+      ,'SurchargeCode'
+      ,'TicketChargePayAmount'
+      ,'TicketChargeAmount'
+      ,'TicketChargePrice'
+      ,'TicketChargeName'
+      ,'TicketChargeCode'
+      ,'FacilityFeePayAmount'
+      ,'FacilityFeeAmount'
+      ,'FacilityFeePrice'
+      ,'ItemPayAmount'
+      ,'ItemAmount'
+      ,'ItemPrice'
+      ,'ItemQuantity'
+      ,'TransActivityType'
+      ,'TransActivityName'
+      ,'TransActivityCode'
+      ,'AssocAccountId'
+      ,'DiscountAmount'
+      ,'DiscountName'
+      ,'DiscountCode'
+      ,'DispositionName'
+      ,'DispositionCode'
+      ,'PromoName'
+      ,'PromoCode'
+      ,'InternetRefSource'
+      ,'InternetRefData'
+      ,'SalcodeCode'
+      ,'BillPlanTypeCode'
+      ,'PriceLevelCode'
+      ,'PriceTypeCode'
+      ,'ItemCode'
+      ,'Date'
+      ,'AccountId'
+      ,'VMC'
+      ,'TransNumber'
+      ,'loadid'
+      ,'filename'
+
 ]
 
 const sorted = arr.sort()
-
+sorted.forEach(element => {
+  console.log(element)
+});
 console.log(sorted)
 
