@@ -341,23 +341,23 @@ FROM [echlRush].[staging].[paciolanSeat]
 INTO [echlRush].[staging].[paciolanSeat_migration]
 
 
---- stubhub
-SELECT 
-      [AccountId]
-      ,[EventCode]
-      ,[OriginalTicketAmount]
-      ,[Quantity]
-      ,CAST([ResaleDate] AS datetime2) AS ResaleDate
-      ,[ResaleValue]
-      ,[SalecodeCode]
-      ,[SeasonCode]
-      ,[SeatBlock]
-      ,[TransNumber]
-      ,[TransType]
-      ,[loadid]
-      ,[filename]
-FROM [echlRush].[staging].[paciolanStubhub]
-INTO [echlRush].[staging].[paciolanStubhub_migration]
+-- --- stubhub
+-- SELECT 
+--       [AccountId]
+--       ,[EventCode]
+--       ,[OriginalTicketAmount]
+--       ,[Quantity]
+--       ,CAST([ResaleDate] AS datetime2) AS ResaleDate
+--       ,[ResaleValue]
+--       ,[SalecodeCode]
+--       ,[SeasonCode]
+--       ,[SeatBlock]
+--       ,[TransNumber]
+--       ,[TransType]
+--       ,[loadid]
+--       ,[filename]
+-- FROM [echlRush].[staging].[paciolanStubhub]
+-- INTO [echlRush].[staging].[paciolanStubhub_migration]
 
 
 --- transitemevents
