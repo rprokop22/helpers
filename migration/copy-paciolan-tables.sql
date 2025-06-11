@@ -1,4 +1,26 @@
-use echlRush
+use echlHeartlanders
+
+-- DROP TABLE [staging].[paciolanAccountMerge_migration];
+-- DROP TABLE [staging].[paciolanAccount_migration];
+-- DROP TABLE [staging].[paciolanAddressType_migration];
+-- DROP TABLE [staging].[paciolanBarcode_migration];
+-- DROP TABLE [staging].[paciolanBillPlanType_migration];
+-- DROP TABLE [staging].[paciolanContact_migration];
+-- DROP TABLE [staging].[paciolanEmail_migration];
+-- DROP TABLE [staging].[paciolanEventOrderDetail_migration];
+-- DROP TABLE [staging].[paciolanEvent_migration];
+-- DROP TABLE [staging].[paciolanItemOrderDetail_migration];
+-- DROP TABLE [staging].[paciolanOdetDelete_migration];
+-- DROP TABLE [staging].[paciolanPhone_migration];
+-- DROP TABLE [staging].[paciolanPriceLevel_migration];
+-- DROP TABLE [staging].[paciolanPriceType_migration];
+-- DROP TABLE [staging].[paciolanSeason_migration];
+-- DROP TABLE [staging].[paciolanSeat_migration];
+-- DROP TABLE [staging].[paciolanStubhub_migration];
+-- DROP TABLE [staging].[paciolanTransItemEvent_migration];
+-- DROP TABLE [staging].[paciolanTransItem_migration];
+
+
 
 --accounts
 
@@ -25,8 +47,8 @@ SELECT
   CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime,
   [filename],
   [loadid]
-INTO [echlRush].[staging].[paciolanAccount_migration]
-FROM [echlRush].[staging].[paciolanAccount]
+INTO [echlHeartlanders].[staging].[paciolanAccount_migration]
+FROM [echlHeartlanders].[staging].[paciolanAccount]
 
 
 --- accountMerge
@@ -37,8 +59,8 @@ SELECT
       ,[ParentAccountDbID]
       ,[ParentAccountID]
       ,CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime
-INTO [echlRush].[staging].[paciolanAccountMerge_migration]
-FROM [echlRush].[staging].[paciolanAccountMerge]
+INTO [echlHeartlanders].[staging].[paciolanAccountMerge_migration]
+FROM [echlHeartlanders].[staging].[paciolanAccountMerge]
   
 
 
@@ -63,8 +85,8 @@ SELECT
   [ZipCode],
   [filename],
   [loadid]
-FROM [echlRush].[staging].[paciolanAddressType]
-INTO [echlRush].[staging].[paciolanAddressType_migration]
+INTO [echlHeartlanders].[staging].[paciolanAddressType_migration]
+FROM [echlHeartlanders].[staging].[paciolanAddressType]
 
 
 --- barcode
@@ -91,8 +113,8 @@ CAST([ScanDateTime] AS datetime2) AS ScanDateTime,
 [StatusName],
 [filename],
 [loadid]
-FROM [echlRush].[staging].[paciolanBarcode]
-INTO [echlRush].[staging].[paciolanBarcode_migration]
+INTO [echlHeartlanders].[staging].[paciolanBarcode_migration]
+FROM [echlHeartlanders].[staging].[paciolanBarcode]
 
 
 --- billplantype
@@ -106,8 +128,8 @@ SELECT
       ,[VMC]
       ,[loadid]
       ,[filename]
-FROM [echlRush].[staging].[paciolanBillPlanType]
-INTO [echlRush].[staging].[paciolanBillPlanType_migration]
+INTO [echlHeartlanders].[staging].[paciolanBillPlanType_migration]
+FROM [echlHeartlanders].[staging].[paciolanBillPlanType]
 
 
 --- contact
@@ -126,8 +148,8 @@ SELECT
 ,CAST([UpdatedDateTime] AS datetime2) AS UpdatedDateTime
 ,[filename]
 ,[loadid]
-FROM [echlRush].[staging].[paciolanContact]
-INTO [echlRush].[staging].[paciolanContact_migration]
+INTO [echlHeartlanders].[staging].[paciolanContact_migration]
+FROM [echlHeartlanders].[staging].[paciolanContact]
 
 
 --- email
@@ -140,8 +162,8 @@ SELECT
       ,CAST([UpdateDateTime] AS datetime2) AS UpdateDateTime
       ,[loadid]
       ,[filename]
-FROM [echlRush].[staging].[paciolanEmail]
-INTO [echlRush].[staging].[paciolanEmail_migration]
+INTO [echlHeartlanders].[staging].[paciolanEmail_migration]
+FROM [echlHeartlanders].[staging].[paciolanEmail]
 
 
 --- event
@@ -174,8 +196,8 @@ SELECT
 ,[SeatsRemaining]
 ,[filename]
 ,[loadid]
-FROM [echlRush].[staging].[paciolanEvent]
-INTO [echlRush].[staging].[paciolanEvent_migration]
+INTO [echlHeartlanders].[staging].[paciolanEvent_migration]
+FROM [echlHeartlanders].[staging].[paciolanEvent]
 
 
 --- eventorderdetail
@@ -208,8 +230,8 @@ SELECT
 [VMC],
 [filename],
 [loadid]
-FROM [echlRush].[staging].[paciolanEventOrderDetail]
-INTO [echlRush].[staging].[paciolanEventOrderDetail_migration]
+INTO [echlHeartlanders].[staging].[paciolanEventOrderDetail_migration]
+FROM [echlHeartlanders].[staging].[paciolanEventOrderDetail]
 
 
 --- item order detail
@@ -253,8 +275,8 @@ CAST([Date] AS datetime2) AS Date,
 [TicketChargePrice],
 [filename],
 [loadid]
-FROM [echlRush].[staging].[paciolanItemOrderDetail]
-INTO [echlRush].[staging].[paciolanItemOrderDetail_migration]
+INTO [echlHeartlanders].[staging].[paciolanItemOrderDetail_migration]
+FROM [echlHeartlanders].[staging].[paciolanItemOrderDetail]
 
 
 --- odetdelete
@@ -264,8 +286,8 @@ SELECT
       ,[SEQ_DEL]
       ,[loadid]
       ,[filename]
-FROM [echlRush].[staging].[paciolanOdetDelete]
-INTO [echlRush].[staging].[paciolanOdetDelete_migration]
+INTO [echlHeartlanders].[staging].[paciolanOdetDelete_migration]
+FROM [echlHeartlanders].[staging].[paciolanOdetDelete]
 
 --- phone
 SELECT 
@@ -278,8 +300,8 @@ SELECT
       ,CAST([UpdateDateTime] AS datetime2) AS UpdateDateTime
       ,[loadid]
       ,[filename]
-FROM [echlRush].[staging].[paciolanPhone]
-INTO [echlRush].[staging].[paciolanPhone_migration]
+INTO [echlHeartlanders].[staging].[paciolanPhone_migration]
+FROM [echlHeartlanders].[staging].[paciolanPhone]
 
 
 --- pricelevel
@@ -291,8 +313,8 @@ SELECT
       ,[SeasonCode]
       ,[loadid]
       ,[filename]
-FROM [echlRush].[staging].[paciolanPriceLevel]
-INTO [echlRush].[staging].[paciolanPriceLevel_migration]
+INTO [echlHeartlanders].[staging].[paciolanPriceLevel_migration]
+FROM [echlHeartlanders].[staging].[paciolanPriceLevel]
 
 
 --- season
@@ -306,8 +328,8 @@ SELECT
       ,[Status]
       ,[loadid]
       ,[filename]
-FROM [echlRush].[staging].[paciolanSeason]
-INTO [echlRush].[staging].[paciolanSeason_migration]
+INTO [echlHeartlanders].[staging].[paciolanSeason_migration]
+FROM [echlHeartlanders].[staging].[paciolanSeason]
 
 
 --- seats
@@ -337,27 +359,27 @@ CAST([LastUpdate] AS datetime2) AS LastUpdate,
 [VMC],
 [filename],
 [loadid]
-FROM [echlRush].[staging].[paciolanSeat]
-INTO [echlRush].[staging].[paciolanSeat_migration]
+INTO [echlHeartlanders].[staging].[paciolanSeat_migration]
+FROM [echlHeartlanders].[staging].[paciolanSeat]
 
 
--- --- stubhub
--- SELECT 
---       [AccountId]
---       ,[EventCode]
---       ,[OriginalTicketAmount]
---       ,[Quantity]
---       ,CAST([ResaleDate] AS datetime2) AS ResaleDate
---       ,[ResaleValue]
---       ,[SalecodeCode]
---       ,[SeasonCode]
---       ,[SeatBlock]
---       ,[TransNumber]
---       ,[TransType]
---       ,[loadid]
---       ,[filename]
--- FROM [echlRush].[staging].[paciolanStubhub]
--- INTO [echlRush].[staging].[paciolanStubhub_migration]
+--- stubhub
+SELECT 
+      [AccountId]
+      ,[EventCode]
+      ,[OriginalTicketAmount]
+      ,[Quantity]
+      ,CAST([ResaleDate] AS datetime2) AS ResaleDate
+      ,[ResaleValue]
+      ,[SalecodeCode]
+      ,[SeasonCode]
+      ,[SeatBlock]
+      ,[TransNumber]
+      ,[TransType]
+      ,[loadid]
+      ,[filename]
+INTO [echlHeartlanders].[staging].[paciolanStubhub_migration]
+FROM [echlHeartlanders].[staging].[paciolanStubhub]
 
 
 --- transitemevents
@@ -397,8 +419,8 @@ CAST([Date] AS datetime2) AS Date,
 [VMC],
 [filename],
 [loadid]
-FROM [echlRush].[staging].[paciolanTransItemEvent]
-INTO [echlRush].[staging].[paciolanTransItemEvent_migration]
+INTO [echlHeartlanders].[staging].[paciolanTransItemEvent_migration]
+FROM [echlHeartlanders].[staging].[paciolanTransItemEvent]
 
 
 --- transitems
@@ -444,15 +466,14 @@ CAST([Date] AS datetime2) AS Date,
 [VMC],
 [filename],
 [loadid]
-FROM [echlRush].[staging].[paciolanTransItem]
-INTO [echlRush].[staging].[paciolanTransItem_migration]
-
+INTO [echlHeartlanders].[staging].[paciolanTransItem_migration]
+FROM [echlHeartlanders].[staging].[paciolanTransItem]
 
 ---
 SELECT 
 
-FROM [echlRush].[staging].[test]
 INTO [echlRush].[staging].[test_migration]
+FROM [echlRush].[staging].[test]
 
 
 accounts_merge
