@@ -472,8 +472,8 @@ FROM [echlHeartlanders].[staging].[paciolanTransItem]
 ---
 SELECT 
 
-INTO [echlRush].[staging].[test_migration]
-FROM [echlRush].[staging].[test]
+INTO [echlHeartlanders].[staging].[test_migration]
+FROM [echlHeartlanders].[staging].[test]
 
 
 accounts_merge
